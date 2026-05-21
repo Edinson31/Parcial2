@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include("../../config/database.php");
@@ -20,14 +19,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         if(password_verify($password,$row['password'])){
 
-            $_SESSION['id'] = $row['id'];
+            $_SESSION['id_usuario'] = $row['id'];
             $_SESSION['rol'] = $row['rol'];
 
             if($row['rol'] == 'rh'){
-                header("Location: ../rh/dashboard.php");
+                header("Location: ../../controllers/admincontroller.php");
             }else{
-                header("Location: ../aspirante/dashboard.php");
+                header("Location: ../../dashboard/index.php");
             }
+            exit();
 
         }else{
             sleep(1);
@@ -37,6 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }else{
         echo "Usuario no encontrado";
     }
+    
 
 }
 ?>
